@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 800vh;
+  font-family: "PP Neue Montreal";
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-family: "FK Screamer";
+  font-weight: lighter;
+  font-size: 64px;
+  line-height: 1;
+}
+
+h1 span {
+  color: #ff6b00;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero,
+.outro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+}
+
+.hero img{
+  width: 300px;
+  height: 300px;
+  margin-right: 2.4em;
+}
+.hero h1,
+.outro h1 {
+  text-align: center;
+  font-size: 80px;
+}
+
+.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150% !important;
+  height: 150% !important;
+}
+
+canvas.outline-layer {
+  z-index: 1;
+}
+
+canvas.fill-layer {
+  z-index: 3;
+}
+
+.cards {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  will-change: transform;
+  z-index: 2;
+}
+
+.card {
+  position: relative;
+  width: 10%;
+  height: 75%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1.5em;
+}
+
+.card p{
+  font-size: 24px;
+}
+.card-img,
+.card-title {
+  flex: 1;
+  overflow: hidden;
+}
+
+.card-title {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .card {
+    width: 25%;
+  }
+  .hero{
+    flex-direction: column;
+  }
+  .hero img{
+    width: 150px;
+    height: 150px;
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
+  .outro h1{
+    font-size: 36px;
+  }
+}
