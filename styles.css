@@ -1,3 +1,7 @@
+:root {
+  --bg: #fff;
+  --text: #000;
+}
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +13,36 @@ body {
   width: 100%;
   height: 800vh;
   font-family: "PP Neue Montreal";
+}
+
+.pre-loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 2;
+}
+
+.loader-wrapper {
+  position: relative;
+  width: 5px;
+  height: 100px;
+  background: rgb(240, 240, 240, 0.25);
+  overflow: hidden;
+  transform: rotate(40deg);
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  width: 120%;
+  height: 120%;
+  background: var(--bg);
 }
 
 img {
@@ -49,6 +83,58 @@ section {
   background-color: #fff;
   color: #000;
 }
+
+.bubbles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  /* background: url(./shanghai_reversed.png) no-repeat 50% 50%;
+  background-size: contain; */
+  mix-blend-mode: difference;
+  transform-origin: center;
+}
+
+.bubbles::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 0; /* No more negative left values */
+  width: 100vw; /* Keep it at viewport width */
+  height: 100vh;
+  background: url(assets/wing_inverted.png) no-repeat center;
+  background-size: 50%;
+  background-position: bottom;
+  z-index: -1;
+  pointer-events: none; /* Ensures no unwanted interactions */
+}
+
+.ui-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  pointer-events: none; /* makes sure it doesn't block scroll */
+}
+
+.logo, .contact {
+  pointer-events: auto; /* re-enable pointer events for links */
+}
+
+.logo a, .contact a {
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+}
+
 
 .hero img{
   width: 300px;
@@ -153,4 +239,15 @@ canvas.fill-layer {
   .outro h1{
     font-size: 36px;
   }
+  .h1-revealer,
+  .p-revealer,
+  .logo-revealer,
+  .contact-revealer {
+    display: none;
+  }
+  .bubbles::before {
+    background-size: 70%; /* Smaller extra width on mobile */
+    background-position: center;
+  }
 }
+
