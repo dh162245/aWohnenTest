@@ -16,24 +16,34 @@
        <!-- logo -->
        <div class="ui-bar">
         <div class="logo">
-          <a href="#">Alpha Wohnen</a>
+          <a href="#"><img src="assets/alpha_logo_transparent.png" alt=""></a>
           <div class="logo-revealer"></div>
         </div>
       
         <div class="contact">
-          <a href="#">Get PRO</a>
+          <a href="#" class="scroll-to-outro">Kontakt</a>
           <div class="contact-revealer"></div>
         </div>
       </div>
       
       <section class="hero">
-        <img src="assets/logo.png" alt="">
-        <h1>Wohnen</h1>
-        <div class="bubbles"></div>
+        <h1><span>Alpha</span> Wohnen</h1>
+        <h2>Immobilien Gesellschaft</h2>
+
+        <!-- <p>Unsere Objekte</p> -->
+        <a href="#" class="scroll-to-sticky arrow-button" aria-label="Scroll to section">
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="11" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <polyline points="8 12 12 16 16 12" />
+          </svg>
+        </a>
+                <div class="bubbles"></div>
       </section>
 
-      <section class="sticky">
-        <div class="bg-img"><img src="./assets/background.jpg" alt="" /></div>
+      <section class="sticky" id="sticky">
+        <!-- <div class="bg-img"><img src="./assets/background.jpg" alt="" /></div> -->
 
         <canvas class="outline-layer"></canvas>
 
@@ -64,14 +74,25 @@
         <canvas class="fill-layer"></canvas>
       </section>
 
-      <section class="outro">
-        <h1>Kontakt || </h1>
-        <h1> Weitere Objekte</h1>
+      <section class="outro" id="outro">
+        <div class="outro-contact">
+        <h1>ALPHA WOHNEN GmbH</h1>
+        <p>Lagerhausstr. 19 | 52064 Aachen | 02404 5959798 | info@alpha-wohnen.de</p>
+        <p>Inhaber und Geschäftsführer Hakki Acar</p>   
+      </div>
+        <!-- <div id="qr-container">
+          <img id="qr-code" src="alt="Instagram QR Code">
+              </div>      -->
+              <div class="outro-img">
+                <img src="assets/test.png" alt="">
+                <a href="">Aktuelle Objekte</a>
+              </div>
       </section>
     </div>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   </body>
 </html>

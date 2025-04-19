@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setCanvasSize(fillCanvas, fillCtx);
 
   const triangleSize = 150;
-  const lineWidth = 1;
+  const lineWidth = 1.4;
   const SCALE_THRESHOLD = 0.01;
   const triangleStates = new Map();
   let animationFrameId = null;
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.lineTo(x - halfSize, y - halfSize);
       }
       ctx.closePath();
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.075)";
+      ctx.strokeStyle = "rgba(4, 4, 4, 0.07)";
       ctx.lineWidth = lineWidth;
       ctx.stroke();
     }
@@ -70,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.lineTo(x - halfSize, y - halfSize);
       }
       ctx.closePath();
-      ctx.fillStyle = "#0A184F";
-      ctx.strokeStyle = "#0A184F";
+      ctx.fillStyle = "#000";
+      ctx.strokeStyle = "#000";
       ctx.lineWidth = lineWidth;
       ctx.stroke();
       ctx.fill();
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 let pageRevealDelay = 2;
-gsap.from(".logo a, .contact a", 1.5, {
+gsap.from(".logo a, .contact a, .hero a", 1.5, {
   top: "25px",
   ease: "power4.inOut",
   stagger: {
@@ -233,6 +233,7 @@ gsap.from(
   "<"
 );
 
+
 gsap.from(".loader-wrapper", 2, {
   scale: 0.8,
   ease: "power1.inOut",
@@ -253,6 +254,27 @@ gsap.to(
   },
   "-=1"
 );
+// Smooth Scroll when clicked on the link
+const lenis = new Lenis({
+  duration: 2, // or even 2 for slower scroll
+  easing: (t) => 1 - Math.pow(1 - t, 4) // easeOutQuart
+});
+
+lenis.on("scroll", ScrollTrigger.update);
+
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+document.querySelector(".scroll-to-sticky").addEventListener("click", (e) => {
+  e.preventDefault();
+  lenis.scrollTo("#sticky");
+});
+
+document.querySelector(".scroll-to-outro").addEventListener("click", (e) => {
+  e.preventDefault();
+  lenis.scrollTo("#outro");
+});
 
 
 
@@ -273,3 +295,21 @@ document.addEventListener("mousemove", function (e) {
     duration: 1.3,
   });
 });
+
+// Instagram profile URL
+const instagramUrl = "https://www.instagram.com/alphawohnen/";
+
+// Function to generate the QR code
+function generateQRCode() {
+  const qr = new QRious({
+    element: document.getElementById("qr-code"),
+    size: 200,
+    value: instagramUrl
+  });
+
+  // Display the generated QR code
+  document.getElementById("qr-code").style.display = "block";
+}
+
+// Generate the QR code on page load
+window.onload = generateQRCode;

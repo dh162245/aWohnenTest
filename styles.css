@@ -51,7 +51,7 @@ img {
   object-fit: cover;
 }
 
-h1 {
+.hero h1 {
   text-transform: uppercase;
   font-family: "FK Screamer";
   font-weight: lighter;
@@ -60,12 +60,44 @@ h1 {
 }
 
 h1 span {
-  color: #ff6b00;
+  animation: colorLoop 6s infinite;
+  transition: color 1s ease-in-out;
+}
+
+@keyframes colorLoop{
+  0% {color:#000}
+  50% {color: #FF0000;}
+  100% {color:#000}
+
 }
 
 p {
   font-size: 14px;
   font-weight: 500;
+}
+
+.arrow-button {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: var(--text);
+  /* margin-top: 10rem; */
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease, stroke 0.3s ease;
+  stroke: var(--text);
+}
+
+.arrow-button:hover .arrow-icon {
+  transform: translateY(4px);
+  stroke: #FF0000; /* or any hover color */
 }
 
 section {
@@ -75,14 +107,16 @@ section {
   overflow: hidden;
 }
 
-.hero,
-.outro {
+.hero{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   color: #000;
 }
+
+
 
 .bubbles {
   position: absolute;
@@ -94,6 +128,7 @@ section {
   /* background: url(./shanghai_reversed.png) no-repeat 50% 50%;
   background-size: contain; */
   mix-blend-mode: difference;
+  pointer-events: none;
   transform-origin: center;
 }
 
@@ -104,11 +139,11 @@ section {
   left: 0; /* No more negative left values */
   width: 100vw; /* Keep it at viewport width */
   height: 100vh;
-  background: url(assets/wing_inverted.png) no-repeat center;
-  background-size: 50%;
-  background-position: bottom;
+  /* background: url(assets/skyline_inverted_transparent.png) no-repeat; */
+  background-size: 100%;
+  /* background-position: center; */
   z-index: -1;
-  pointer-events: none; /* Ensures no unwanted interactions */
+  pointer-events: none; Ensures no unwanted interactions
 }
 
 .ui-bar {
@@ -116,7 +151,7 @@ section {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 5;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   padding: 2rem;
@@ -135,18 +170,27 @@ section {
   position: relative;
 }
 
+.logo img{
+  width: 50px;
+  height: 50px;
+}
 
 .hero img{
   width: 300px;
   height: 300px;
   margin-right: 2.4em;
 }
-.hero h1,
-.outro h1 {
+.hero h1{
   text-align: center;
-  font-size: 80px;
+  font-size: 160px;
+  font-weight: bold;
 }
 
+.hero h2{
+  font-size: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
 .bg-img {
   position: absolute;
   top: 0;
@@ -211,6 +255,25 @@ canvas.fill-layer {
   justify-content: space-between;
 }
 
+
+.outro{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  padding: 3rem;
+  height: 100vh;
+}
+
+#qr-container{
+  width: 200px;
+  height: 200px;
+}
+
+
+
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
@@ -229,6 +292,15 @@ canvas.fill-layer {
   }
   .hero{
     flex-direction: column;
+  }
+  .hero h1{
+    font-size: 4.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .hero h2{
+    font-size: 2rem;
+    font-weight: 500;
   }
   .hero img{
     width: 150px;
