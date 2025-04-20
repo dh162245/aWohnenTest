@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const fillCanvas = document.querySelector(".fill-layer");
   const outlineCtx = outlineCanvas.getContext("2d");
   const fillCtx = fillCanvas.getContext("2d");
+  const cards         = document.querySelector(".cards");
+  const cardsWidth    = cards.scrollWidth;
+  const viewportWidth = window.innerWidth;
 
   function setCanvasSize(canvas, ctx) {
     const dpr = window.devicePixelRatio || 1;
