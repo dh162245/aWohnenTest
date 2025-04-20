@@ -7,8 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     lenis.raf(time * 1000);
   });
   gsap.ticker.lagSmoothing(0);
+  
+  
 
   const stickySection = document.querySelector(".sticky");
+  const video = document.querySelector(".sticky-video")
   const stickyHeight = window.innerHeight * 5;
   const outlineCanvas = document.querySelector(".outline-layer");
   const fillCanvas = document.querySelector(".fill-layer");
@@ -166,6 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
     drawGrid();
   });
 
+  
+
   ScrollTrigger.create({
     trigger: stickySection,
     start: "top top",
@@ -182,6 +187,35 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     },
   });
+
+const coolVideo = document.querySelector("video");
+
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "video",
+    start: "top top",
+    end: "bottom+=200% bottom",
+    scrub: 2,  }
+});
+
+// wait until video metadata is loaded, so we can grab the proper duration before adding the onscroll animation. Might need to add a loader for loonng videos
+coolVideo.onloadedmetadata = function () {
+  tl.to(coolVideo, { currentTime: coolVideo.duration });
+};
+
+// Dealing with devices
+function isTouchDevice() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+}
+if (isTouchDevice()) {
+  coolVideo.play();
+  coolVideo.pause();
+}
+
 });
 
 
@@ -335,5 +369,32 @@ function generateQRCode() {
 // Generate the QR code on page load
 window.onload = generateQRCode;
 
+
 // background video
+// grab elements
+const stickySection = document.querySelector(".sticky");
+const cards         = document.querySelector(".cards");
+const cardsWidth    = cards.scrollWidth;
+const viewportWidth = window.innerWidth;
+
+// Scroll distance = (total cards width) − (visible viewport width)
+const scrollDistance = cardsWidth - viewportWidth;
+
+ScrollTrigger.create({
+  trigger: stickySection,
+  start:  "top top",
+  end:    () => "+=" + scrollDistance, // pin for exactly that many pixels
+  scrub:  true,
+  pin:    true,
+  onUpdate: (self) => {
+    // move cards from x=0 → x=−scrollDistance
+    gsap.set(cards, {
+      x: -scrollDistance * self.progress
+    });
+  }
+});
+
+// background video
+
+
 
