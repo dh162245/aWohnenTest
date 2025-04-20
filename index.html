@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alpha Wohnen</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="pre-loader block">
@@ -44,10 +47,28 @@
 
       <section class="sticky" id="sticky">
         <!-- <div class="bg-img"><img src="./assets/background.jpg" alt="" /></div> -->
-
+        <video
+        class="sticky-video"
+        src="assets/abstract-background-ink-water.mp4"
+        playsinline
+        muted
+        preload="metadata"
+      ></video>
         <canvas class="outline-layer"></canvas>
-
+       
         <div class="cards">
+          <div class="sticky-info">
+            <div class="sticky-info-title">
+            <h1>Individuell</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi aperiam commodi suscipit quisquam qui.</p>
+            <a href="#sticky" class="scroll-to-sticky animated-link">
+              <span class="inner-text">Unsere Objekte</span>
+            </a>]
+          </div>
+          <div class="sticky-info-img">
+            <img src="assets/test.png" alt="">
+          </div>
+          </div>
           <div class="card">
             <div class="card-img"><img src="./assets/card.jpeg" alt="" /></div>
             <div class="card-title">
@@ -68,6 +89,14 @@
               <h1>Objekt 3</h1>
               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis repellendus iure nam id mollitia!</p>
             </div>
+          </div>
+           <div class="sticky-info">
+            <div class="sticky-info-title">
+            <h1>MEHR</h1>
+            <a href="#sticky" class="scroll-to-sticky animated-link">
+              <span class="inner-text">Unsere Objekte</span>
+            </a>]
+          </div>
           </div>
         </div>
 

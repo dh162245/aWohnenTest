@@ -276,7 +276,28 @@ document.querySelector(".scroll-to-outro").addEventListener("click", (e) => {
   lenis.scrollTo("#outro");
 });
 
+// link button animation
+// assume GSAP is already loaded
+document.querySelectorAll('.animated-link').forEach(link => {
+  const text = link.querySelector('.inner-text');
 
+  // build a paused timeline for this link
+  const tl = gsap.timeline({ paused: true })
+    // step 1: scroll up out of view
+    .to(text, { yPercent: -100, duration: 0.3, ease: 'power1.in' })
+    // step 2: jump to below
+    .set(text,    { yPercent: 100 })
+    // step 3: scroll back into place
+    .to(text, { yPercent: 0, duration: 0.3, ease: 'power1.out' });
+
+  // restart on hover
+  link.addEventListener('mouseenter', () => tl.restart());
+  // optionally reverse on leave
+  link.addEventListener('mouseleave', () => tl.reverse());
+});
+
+
+  link.addEventListener("mouseenter", () => tl.restart());
 
 document.addEventListener("mousemove", function (e) {
   let normX = e.clientX / window.innerWidth - 0.5; // range -0.5 to 0.5
@@ -313,3 +334,6 @@ function generateQRCode() {
 
 // Generate the QR code on page load
 window.onload = generateQRCode;
+
+// background video
+

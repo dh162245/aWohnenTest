@@ -199,6 +199,22 @@ section {
   height: 100%;
 }
 
+.sticky {
+  position: relative;
+  overflow: hidden;        /* hide overflow during scrub */
+}
+
+.sticky-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* like background‑size: cover */
+  z-index: 0;              /* behind your canvas & cards (z‑index as needed) */
+  pointer-events: none;    /* allow clicking through */
+}
+
 canvas {
   position: absolute;
   top: 0;
@@ -228,18 +244,42 @@ canvas.fill-layer {
   z-index: 2;
 }
 
-.card {
+/* .sticky-info{
   position: relative;
-  width: 10%;
+  width: 20%;
   height: 75%;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   gap: 1em;
   padding: 1.5em;
+  background-color: #000;
+} */
+.card {
+  position: relative;
+  width: 10%;
+  height: 75%;
+  background-color: ;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: #fafafa;                  /* very light grey */
+  border-radius: 12px;                  /* gentle rounding */
+  padding: 1.5rem;                      /* nice inner space */
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),      /* small, sharp shadow */
+    0 8px 16px rgba(0, 0, 0, 0.08);     /* larger, diffused shadow */
+  transition: transform 0.3s ease,      /* for hover “lift” */
+              box-shadow 0.3s ease;
 }
 
-.card p{
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card p, .sticky-info p{
   font-size: 24px;
 }
 .card-img,
@@ -254,7 +294,74 @@ canvas.fill-layer {
   flex-direction: column;
   justify-content: space-between;
 }
+.sticky-info{
+  position: relative;
+  width: 20%;
+  height: 75%;
+  background: #fafafa;               
+  display: grid;
+  grid-template-columns: 40% 60%;
+  /* gap: 1em; */
+  padding: 1.5em;
+}
 
+.sticky-info-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h1{
+    font-family: "Onest", sans-serif;
+    font-size: 60px;
+  }
+  p{
+    font-family: "Onest", sans-serif;
+    font-size: 24px;
+  }
+}
+
+.cards .sticky-info:last-of-type{
+  width: 5%;
+  grid-template-columns: 1fr;
+  background: transparent;
+  .sticky-info-title{
+    justify-content:center;
+    align-items: center;
+    h1{
+      padding-bottom: 1em;
+    }
+  }
+}
+.animated-link {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.5em;           /* exactly the line‑height of your text */
+  line-height: 1.5em;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  font-family: "Onest", sans-serif;
+  font-size: 24px;
+}
+
+.inner-text {
+  display: inline-block;
+  transform: translateY(0%);
+  text-decoration: underline;
+}
+
+
+/* Let everything “through” these decorative layers */
+.bubbles,
+.bubbles::before,
+.bg-img,
+canvas,
+.hero .bg-img,
+canvas.outline-layer,
+canvas.fill-layer {
+  pointer-events: none;
+}
 
 .outro{
   display: grid;
