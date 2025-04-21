@@ -244,7 +244,7 @@ canvas.fill-layer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 300%;
+  width: 400%;
   height: 100vh;
   display: flex;
   justify-content: space-around;
@@ -267,7 +267,7 @@ canvas.fill-layer {
   position: relative;
   width: 10%;
   height: 75%;
-  background-color: ;
+  background-color: #f4f4ff;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -447,7 +447,13 @@ canvas.fill-layer {
   }
   .sticky-info-img{
     display: none;
+   }
+
+  .cards {
+    display: flex;
+    gap: 2em;
   }
+  
 
   .sticky-video {
     position: absolute;

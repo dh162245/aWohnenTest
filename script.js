@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const stickySection = document.querySelector(".sticky");
   const video = document.querySelector(".sticky-video")
-  const stickyHeight = window.innerHeight * 5;
+  const stickyHeight = window.innerHeight * 7;
   const outlineCanvas = document.querySelector(".outline-layer");
   const fillCanvas = document.querySelector(".fill-layer");
   const outlineCtx = outlineCanvas.getContext("2d");
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cards         = document.querySelector(".cards");
   const cardsWidth    = cards.scrollWidth;
   const viewportWidth = window.innerWidth;
+  
 
   function setCanvasSize(canvas, ctx) {
     const dpr = window.devicePixelRatio || 1;
@@ -38,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const triangleStates = new Map();
   let animationFrameId = null;
   let canvasXPosition = 0;
+
+  
 
   function drawTriangle(ctx, x, y, fillScale = 0, flipped = false) {
     const halfSize = triangleSize / 2;
@@ -179,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
     start: "top top",
     end: `+=${stickyHeight}px`,
     pin: true,
+    scrub: true,
     onUpdate: (self) => {
       canvasXPosition = -self.progress * 200;
       drawGrid(self.progress);
@@ -186,25 +190,60 @@ document.addEventListener("DOMContentLoaded", () => {
       const cards = document.querySelector(".cards");
       const progress = Math.min(self.progress / 0.654, 1);
       gsap.set(cards, {
-        x: -progress * window.innerWidth * 2,
+        x: -progress * window.innerWidth * 3,
       });
     },
   });
 
 const coolVideo = document.querySelector("video");
 
-let tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: "video",
-    start: "top top",
-    end: "bottom+=200% bottom",
-    scrub: 2,  }
-});
 
-// wait until video metadata is loaded, so we can grab the proper duration before adding the onscroll animation. Might need to add a loader for loonng videos
-coolVideo.onloadedmetadata = function () {
-  tl.to(coolVideo, { currentTime: coolVideo.duration });
-};
+const stickyVideo = document.querySelector('.sticky-video');
+
+function initVideoScrub() {
+  // compute exactly how many pixels you want to scroll
+  // let’s use the .cards width if that’s what you want to line up with
+  const scrollEnd = cards.scrollWidth - window.innerWidth;
+
+  ScrollTrigger.create({
+    trigger: ".video-sticky",
+    start:   "top top",
+    end:     "bottom bottom",  // exactly one "cards"‑width of scroll
+    scrub:   0,                 // ZERO smoothing → direct mapping
+    pin:     true,
+    onUpdate(self) {
+      // map scroll progress (0→1) directly to video time (0→duration)
+      const t = stickyVideo.duration * self.progress;
+      if (stickyVideo.fastSeek) {
+        stickyVideo.fastSeek(t);    // instant if browser supports it
+      } else {
+        stickyVideo.currentTime = t;
+      }
+    },
+    // markers: true
+  });
+}
+
+// once metadata is loaded, fire it up
+if (stickyVideo.readyState >= 1) {
+  initVideoScrub();
+} else {
+  stickyVideo.addEventListener("loadedmetadata", initVideoScrub, { once: true });
+}
+
+
+// let tl = gsap.timeline({
+//   scrollTrigger: {
+//     trigger: "video",
+//     start: "top top",
+//     end: "bottom+=200% bottom",
+//     scrub: 2,  }
+// });
+
+// // wait until video metadata is loaded, so we can grab the proper duration before adding the onscroll animation. Might need to add a loader for loonng videos
+// coolVideo.onloadedmetadata = function () {
+//   tl.to(coolVideo, { currentTime: coolVideo.duration });
+// };
 
 // Dealing with devices
 function isTouchDevice() {
@@ -277,7 +316,7 @@ gsap.from(".loader-wrapper", 2, {
 });
 
 gsap.from(".loader", 2, {
-  top: "100%",
+  top: "110%",
   ease: "power3.inOut",
 });
 
@@ -334,68 +373,46 @@ document.querySelectorAll('.animated-link').forEach(link => {
 });
 
 
-  link.addEventListener("mouseenter", () => tl.restart());
+//   link.addEventListener("mouseenter", () => tl.restart());
 
-document.addEventListener("mousemove", function (e) {
-  let normX = e.clientX / window.innerWidth - 0.5; // range -0.5 to 0.5
-  let normY = e.clientY / window.innerHeight - 0.5;
+// document.addEventListener("mousemove", function (e) {
+//   let normX = e.clientX / window.innerWidth - 0.5; // range -0.5 to 0.5
+//   let normY = e.clientY / window.innerHeight - 0.5;
 
-  let moveX = normX; // Horizontal translation (adjust multiplier to taste)
-  let moveY = normY; // Vertical translation
-  let distance = Math.hypot(normX, normY); // sqrt(normX² + normY²)
-  let zoom = 1 + distance * 0.2; // adjust multiplier as needed
+//   let moveX = normX; // Horizontal translation (adjust multiplier to taste)
+//   let moveY = normY; // Vertical translation
+//   let distance = Math.hypot(normX, normY); // sqrt(normX² + normY²)
+//   let zoom = 1 + distance * 0.2; // adjust multiplier as needed
 
-  gsap.to(".bubbles", {
-    x: moveX,
-    y: moveY,
-    scale: zoom,
-    ease: "power2out",
-    duration: 1.3,
-  });
-});
+//   gsap.to(".bubbles", {
+//     x: moveX,
+//     y: moveY,
+//     scale: zoom,
+//     ease: "power2out",
+//     duration: 1.3,
+//   });
+// });
 
-// Instagram profile URL
-const instagramUrl = "https://www.instagram.com/alphawohnen/";
+// // Instagram profile URL
+// const instagramUrl = "https://www.instagram.com/alphawohnen/";
 
-// Function to generate the QR code
-function generateQRCode() {
-  const qr = new QRious({
-    element: document.getElementById("qr-code"),
-    size: 200,
-    value: instagramUrl
-  });
+// // Function to generate the QR code
+// function generateQRCode() {
+//   const qr = new QRious({
+//     element: document.getElementById("qr-code"),
+//     size: 200,
+//     value: instagramUrl
+//   });
 
-  // Display the generated QR code
-  document.getElementById("qr-code").style.display = "block";
-}
+//   // Display the generated QR code
+//   document.getElementById("qr-code").style.display = "block";
+// }
 
-// Generate the QR code on page load
-window.onload = generateQRCode;
+// // Generate the QR code on page load
+// window.onload = generateQRCode;
 
 
-// background video
-// grab elements
-const stickySection = document.querySelector(".sticky");
-const cards         = document.querySelector(".cards");
-const cardsWidth    = cards.scrollWidth;
-const viewportWidth = window.innerWidth;
 
-// Scroll distance = (total cards width) − (visible viewport width)
-const scrollDistance = cardsWidth - viewportWidth;
-
-ScrollTrigger.create({
-  trigger: stickySection,
-  start:  "top top",
-  end:    () => "+=" + scrollDistance, // pin for exactly that many pixels
-  scrub:  true,
-  pin:    true,
-  onUpdate: (self) => {
-    // move cards from x=0 → x=−scrollDistance
-    gsap.set(cards, {
-      x: -scrollDistance * self.progress
-    });
-  }
-});
 
 // background video
 
