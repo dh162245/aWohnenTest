@@ -258,6 +258,30 @@ if (isTouchDevice()) {
   coolVideo.pause();
 }
 
+gsap.registerPlugin(ScrollTrigger);
+
+const outroTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#outro",
+    start:    "top bottom",   // when top of #outro hits bottom of viewport
+    end:      "bottom top",    // until bottom of #outro hits top of viewport
+    scrub:    true,            // play forward on scroll down, reverse on scroll up
+    // markers: true,          // uncomment to debug
+  }
+});
+
+outroTl
+  .to("#outro .alpha",        { y:0, opacity:1, duration:0.3, ease:"power2.out" })
+  .to(
+    "#outro .wohnen, #outro .wohnen-img",
+    { y:0, opacity:1, duration:0.3, ease:"power2.out" },
+    "+=0.1"
+  )
+  .to("#outro .gmbh",         { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1")
+  .to("#outro .address",      { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1")
+  .to("#outro .owner",        { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1")
+  .to("#outro a.outro-text",  { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1");
+
 });
 
 
@@ -316,7 +340,7 @@ gsap.from(".loader-wrapper", 2, {
 });
 
 gsap.from(".loader", 2, {
-  top: "110%",
+  top: "100%",
   ease: "power3.inOut",
 });
 
@@ -324,7 +348,7 @@ gsap.to(
   ".loader-wrapper, .pre-loader",
   1,
   {
-    top: "-100%",
+    top: "-120%",
     ease: "power3.inOut",
     delay: 2,
   },
@@ -411,10 +435,6 @@ document.querySelectorAll('.animated-link').forEach(link => {
 // // Generate the QR code on page load
 // window.onload = generateQRCode;
 
-
-
-
-// background video
 
 
 

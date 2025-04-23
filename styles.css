@@ -381,12 +381,47 @@ canvas.fill-layer {
   color: #fff;
   padding: 3rem;
   height: 100vh;
+  .word{
+    font-family: "Onest", sans-serif;
+    font-size: 90px;
+  }
+  p{
+    font-family: "Onest", sans-serif;
+    font-size: 24px;
+  }
 }
 
+.outro a{
+  color: #fff;
+  margin-top: 2em;
+}
+.alpha {
+  animation: colorLoop2 6s infinite;
+  transition: color 1s ease-in-out;
+}
+
+@keyframes colorLoop2{
+  0% {color:#fff}
+  50% {color: #FF0000;}
+  100% {color:#fff}
+
+}
 #qr-container{
   width: 200px;
   height: 200px;
 }
+
+/* hide these initially: */
+#outro .alpha,
+#outro .wohnen,
+#outro .gmbh,
+#outro .wohnen-img,
+#outro .outro-text {
+  opacity: 0;
+  transform: translateY(500px);
+}
+
+
 
 
 
@@ -475,9 +510,6 @@ canvas.fill-layer {
     width: 20%;
   }
   
-  .outro h1{
-    font-size: 36px;
-  }
   .h1-revealer,
   .p-revealer,
   .logo-revealer,
@@ -488,5 +520,23 @@ canvas.fill-layer {
     background-size: 70%; /* Smaller extra width on mobile */
     background-position: center;
   }
+  .outro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .word{
+      font-size: 60px;
+    }
+  }
+
+  .outro-contact{
+    margin-bottom: 2em;
+  }
+  .outro a{
+    margin-top: 2em;
+  }
+
+ 
 }
 
