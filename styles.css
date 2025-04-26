@@ -377,7 +377,6 @@ canvas.fill-layer {
   grid-template-columns: 2fr 1fr;
   justify-content: center;
   align-items: center;
-  background-color: #000;
   color: #fff;
   padding: 3rem;
   height: 100vh;
@@ -395,6 +394,15 @@ canvas.fill-layer {
   color: #fff;
   margin-top: 2em;
 }
+
+.bg-gradient-vertical {
+  background: linear-gradient(
+    to bottom,      /* top → bottom */
+    #6D0100 0%,     /* red at top */
+    #000000 100%    /* black at bottom */
+  );
+}
+
 .alpha {
   animation: colorLoop2 6s infinite;
   transition: color 1s ease-in-out;

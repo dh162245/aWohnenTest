@@ -32,6 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   setCanvasSize(outlineCanvas, outlineCtx);
   setCanvasSize(fillCanvas, fillCtx);
+  // right after setCanvasSize(fillCanvas, fillCtx);
+// gradient from top (red) to bottom (black)
+const height = fillCanvas.getBoundingClientRect().height;
+const fillGrad = fillCtx.createLinearGradient(0, 0, 0, height);
+fillGrad.addColorStop(0, "#000000");
+fillGrad.addColorStop(1, "#ff0000");
+fillCtx.fillStyle = fillGrad;
+// keep strokeStyle if you like:
+// fillCtx.strokeStyle = "#000";
+
 
   const triangleSize = 150;
   const lineWidth = 1.4;
@@ -79,8 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.lineTo(x - halfSize, y - halfSize);
       }
       ctx.closePath();
-      ctx.fillStyle = "#000";
-      ctx.strokeStyle = "#000";
+      // ctx.fillStyle = "#000";
+      ctx.strokeStyle = "#6D0100";
       ctx.lineWidth = lineWidth;
       ctx.stroke();
       ctx.fill();
@@ -174,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeTriangles();
     drawGrid();
   });
+
 
   
 
