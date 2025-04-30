@@ -219,8 +219,8 @@ function initVideoScrub() {
   ScrollTrigger.create({
     trigger: ".video-sticky",
     start:   "top top",
-    end:     "bottom bottom",  // exactly one "cards"‑width of scroll
-    scrub:   0,                 // ZERO smoothing → direct mapping
+    end:     "bottom+=150% bottom",  // exactly one "cards"‑width of scroll
+    scrub:   3,                 // ZERO smoothing → direct mapping
     pin:     true,
     onUpdate(self) {
       // map scroll progress (0→1) directly to video time (0→duration)

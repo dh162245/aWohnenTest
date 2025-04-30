@@ -193,6 +193,11 @@ section {
   text-align: center;
   text-transform: uppercase;
 }
+.hero p{
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+}
 .bg-img {
   position: absolute;
   top: 0;
@@ -272,11 +277,11 @@ canvas.fill-layer {
   flex-direction: column;
   gap: 1em;
   background: #fafafa;                  /* very light grey */
-  border-radius: 12px;                  /* gentle rounding */
+  border-radius: 10px;                  /* gentle rounding */
   padding: 1.5rem;                      /* nice inner space */
   box-shadow: 
     0 2px 4px rgba(0, 0, 0, 0.05),      /* small, sharp shadow */
-    0 8px 16px rgba(0, 0, 0, 0.08);     /* larger, diffused shadow */
+    0 4px 8px rgba(0, 0, 0, 0.08);     /* larger, diffused shadow */
   transition: transform 0.3s ease,      /* for hover “lift” */
               box-shadow 0.3s ease;
 }
@@ -290,6 +295,14 @@ canvas.fill-layer {
 
 .card p, .sticky-info p{
   font-size: 24px;
+  margin-top: 1em;
+  text-shadow:   1px 1px 2px rgba(0,0,0,0.3),   /* subtle drop shadow */
+  -1px -1px 0   rgba(255,255,255,0.8); /* light highlight on top-left */
+}
+.card h1{
+  text-shadow:   1px 1px 2px rgba(0,0,0,0.3),   /* subtle drop shadow */
+  -1px -1px 0   rgba(255,255,255,0.8); /* light highlight on top-left */
+
 }
 .card-img,
 .card-title {
@@ -298,18 +311,30 @@ canvas.fill-layer {
 }
 
 .card-title {
-  color: #000;
+  color: #333333;
+  font-family: "Onest", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
+/* #card_1{
+  background: url('assets/card1.jpeg') center/cover no-repeat;
+}
+#card_2{
+  background: url('assets/card2.jpeg') center/cover no-repeat;
+}
+#card_3{
+  background: url('assets/card3.jpeg') center/cover no-repeat;
+} */
+
 .sticky-info{
   position: relative;
-  width: 20%;
+  width: 10%;
   height: 75%;
   background: transparent;               
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 1fr;
   /* gap: 1em; */
   padding: 1.5em;
 }
@@ -322,15 +347,17 @@ canvas.fill-layer {
   h1{
     font-family: "Onest", sans-serif;
     font-size: 60px;
+    color: #fff;
   }
   p{
     font-family: "Onest", sans-serif;
     font-size: 24px;
+    color: #fff;
   }
 }
 
-.cards .sticky-info:last-of-type{
-  width: 5%;
+/* .cards .sticky-info:last-of-type{
+  width: 7%;
   grid-template-columns: 1fr;
   background: transparent;
   .sticky-info-title{
@@ -338,9 +365,13 @@ canvas.fill-layer {
     align-items: center;
     h1{
       padding-bottom: 1em;
+      color: #fff;
     }
   }
-}
+  .animated-link{
+    margin-top: 1em;
+  }
+} */
 .animated-link {
   display: inline-block;
   overflow: hidden;
@@ -352,6 +383,7 @@ canvas.fill-layer {
   color: var(--text);
   font-family: "Onest", sans-serif;
   font-size: 24px;
+  color: #fff;
 }
 
 .inner-text {
@@ -467,6 +499,15 @@ canvas.fill-layer {
     margin-right: 0;
     margin-bottom: 25px;
   }
+  .card{
+    gap: 0.5em;
+  }
+  .card h1{
+    font-size: 1.3em;
+  }
+  .card p{
+    font-size: 1em;
+  }
   .sticky-info{
     display: flex;
     flex-direction: column;
@@ -477,15 +518,15 @@ canvas.fill-layer {
   .sticky-info-title{
     line-height: 30px;
     h1{
-      font-size: 36px;
-      padding-bottom: 50px;
+      font-size: 24px;
+      padding-bottom: 24px;
     }
     p{
-      font-size: 24px;
-      padding-bottom: 80px;
+      font-size: 14px;
+      padding-bottom: 24px;
     }
     a{
-      font-size: 24px;
+      font-size: 14px;
     }
   }
   .sticky-info-img{
