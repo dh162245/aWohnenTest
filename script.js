@@ -219,8 +219,8 @@ function initVideoScrub() {
   ScrollTrigger.create({
     trigger: ".video-sticky",
     start:   "top top",
-    end:     "bottom+=150% bottom",  // exactly one "cards"‑width of scroll
-    scrub:   3,                 // ZERO smoothing → direct mapping
+    end:     "bottom bottom",  // exactly one "cards"‑width of scroll
+    scrub:   2,                 // ZERO smoothing → direct mapping
     pin:     true,
     onUpdate(self) {
       // map scroll progress (0→1) directly to video time (0→duration)
@@ -292,6 +292,14 @@ outroTl
   .to("#outro .address",      { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1")
   .to("#outro .owner",        { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1")
   .to("#outro a.outro-text",  { y:0, opacity:1, duration:0.3, ease:"power2.out" }, "+=0.1");
+
+
+
+
+
+
+
+
 
 });
 
@@ -446,6 +454,61 @@ document.querySelectorAll('.animated-link').forEach(link => {
 // // Generate the QR code on page load
 // window.onload = generateQRCode;
 
+// register plugin (once at top of your script)
+gsap.registerPlugin(ScrollTrigger);
+
+// for each card, tween its inner wrapper on scroll
+document.querySelectorAll(".obj-card").forEach(card => {
+  const inner = card.querySelector(".obj-card-inner");
+  const cardHeight = card.offsetHeight;
+  const innerHeight = inner.scrollHeight;
+
+  // how far can the inner element move? 
+  // (innerHeight − cardHeight) is the maximum overflow
+  const maxOffset = innerHeight - cardHeight;
+
+  // if there’s no overflow, skip it
+  if (maxOffset <= 0) return;
+
+  gsap.to(inner, {
+    y: -maxOffset,      // move it up by the full overflow
+    ease: "none",
+    scrollTrigger: {
+      trigger: card,
+      start: "top bottom",   // when card top hits bottom of viewport
+      end:   "bottom top",   // until card bottom hits top of viewport
+      scrub: true            // smooth scrubbing tied to scroll
+    }
+  });
+});
 
 
 
+// REVEAL EACH CARD
+gsap.utils.toArray('.obj-card').forEach(card => {
+  gsap.from(card, {
+    y: 50,
+    opacity: 0,
+    duration: 0.7,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: card,
+      start: 'top 85%',      // when the top of the card hits 85% down the viewport
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+
+// REVEAL OUTRO SECTION
+gsap.from('#outro .outro-contact > *, #outro .outro-img', {
+  y: 50,
+  opacity: 0,
+  duration: 0.8,
+  ease: 'power2.out',
+  stagger: 0.2,            // animate items one after another
+  scrollTrigger: {
+    trigger: '#outro',
+    start: 'top 75%',
+    toggleActions: 'play none none reverse'
+  }
+});
